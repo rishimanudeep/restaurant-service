@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "ecbe7d6d-8302-4762-8340-32ec408e0c2e",
+		"name": "Restaurant Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13593509"
+	},
+	"item": [
+		{
+			"name": "Menu",
+			"item": [
+				{
+					"name": "Register Menu",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'code' field in the 'errors' array is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.errors).to.be.an('array');",
+									"    ",
+									"    responseData.errors.forEach(function(error) {",
+									"        pm.expect(error.code).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'reason' field in the 'errors' array is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.errors).to.be.an('array');",
+									"  responseData.errors.forEach(function(error) {",
+									"    pm.expect(error.reason).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Kroger-Tenant",
+								"value": "kroger"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "asdf"
+							},
+							{
+								"key": "True-Client-Ip",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "clientId",
+								"value": "{{clientId}}"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$timestamp}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restaurant_id\": 4,\n    \"items\": [\n        {\n            \"item_id\": \"550e8400-e29b-41d4-a716-446655440010\",\n            \"item_name\": \"Caesar Salad\",\n            \"description\": \"Crisp romaine lettuce and croutons dressed with parmesan cheese, lemon juice, olive oil, egg, Worcestershire sauce, anchovies, garlic, and black pepper.\",\n            \"is_available\": false,\n            \"price\": 8.50\n        },\n        {\n            \"item_id\": \"550e8400-e29b-41d4-a716-446655440011\",\n            \"item_name\": \"Chocolate Lava Cake\",\n            \"description\": \"Warm chocolate cake with a gooey, molten chocolate center.\",\n            \"is_available\": true,\n            \"price\": 5.75\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{eix-merchant-platform-consumer-url}}/menu",
+							"host": [
+								"{{eix-merchant-platform-consumer-url}}"
+							],
+							"path": [
+								"menu"
+							],
+							"query": [
+								{
+									"key": "filter.access",
+									"value": "ADMIN",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Meny By Restaurant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'code' field in the 'errors' array is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.errors).to.be.an('array');",
+									"    ",
+									"    responseData.errors.forEach(function(error) {",
+									"        pm.expect(error.code).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'reason' field in the 'errors' array is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.errors).to.be.an('array');",
+									"  responseData.errors.forEach(function(error) {",
+									"    pm.expect(error.reason).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Kroger-Tenant",
+								"value": "kroger"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "asdf"
+							},
+							{
+								"key": "True-Client-Ip",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "clientId",
+								"value": "{{clientId}}"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$timestamp}}"
+							}
+						],
+						"url": {
+							"raw": "{{eix-merchant-platform-consumer-url}}/menu/1",
+							"host": [
+								"{{eix-merchant-platform-consumer-url}}"
+							],
+							"path": [
+								"menu",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurant",
+			"item": [
+				{
+					"name": "Register Restaurant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'code' field in the 'errors' array is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.errors).to.be.an('array');",
+									"    ",
+									"    responseData.errors.forEach(function(error) {",
+									"        pm.expect(error.code).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'reason' field in the 'errors' array is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.errors).to.be.an('array');",
+									"  responseData.errors.forEach(function(error) {",
+									"    pm.expect(error.reason).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjlHbW55RlBraGMzaE91UjIybXZTdmduTG83WSJ9.eyJhdWQiOiI3OGNiOWZkZC1mYTMzLTQ2MDYtOTQ0YS00MTJkMjJhNTQ0N2IiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vODMzMWUxNGEtOTEzNC00Mjg4LWJmNWEtNWUyYzg0MTJmMDc0L3YyLjAiLCJpYXQiOjE2OTc3OTE2MDYsIm5iZiI6MTY5Nzc5MTYwNiwiZXhwIjoxNjk3Nzk1NTA2LCJuYW1lIjoiUHVwcGFsYSwgU3VkaGVlciBLdW1hciAoTm9uRW1wKSIsIm5vbmNlIjoiOGQ2M2E5MzMtMWEyMS00MjliLThkZDktMDYxYmZhNzY4OWYzIiwib2lkIjoiOTI5OTAwNGMtOGFiYy00NTlkLTkzYzctZWYxNjU1NGE5MTVkIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic3VkaGVlcmt1bWFyLnB1cHBhbGFAa3JvZ2VyLmNvbSIsInJoIjoiMC5BUmNBU3VFeGd6U1JpRUtfV2w0c2hCTHdkTjJmeTNnei1nWkdsRXBCTFNLbFJIc1hBS1EuIiwicm9sZXMiOlsiZ0FEODM0MU1YUG9ydGFsQWRtaW5OIiwiZ0FEODM0MU1YVXNlclJlYWRlck4iLCJnQUQ4MzQxTVhVc2VyQ29udHJpYnV0b3JOIl0sInN1YiI6IjZNb1RMbW9KVTVzSW84SEkteUlfaC1EeVBtVVlXSTR6V1JCSVhzcVZLd3MiLCJ0aWQiOiI4MzMxZTE0YS05MTM0LTQyODgtYmY1YS01ZTJjODQxMmYwNzQiLCJ1dGkiOiI2bS1LXzhwR3IwbU90NzJKNlkwSEFBIiwidmVyIjoiMi4wIn0.pL2AlJ8mXq8JwiyhnDabtP_ZNctLCDC7k_NdMTlwMutbBMEB4O4YpuOX79k9YC9ce0legk0E5nk9myrpldHMdxXeT9CI_U9I6DTcaap5MFXDzhF7eSueSok6QkgMMk_7mGLvFoP2jQ2S4xnT2AP15Nk0kh9k5Qwn018Ix7Bv1fpbxFcFqVomtdi_StrhIPMxAbUdALrEVd4IrSprjFkSkkQOn-Ro4ZXyvdO8myInOMfB9E68G6yEVvsE2E0USiSXUxUd_8v7CotTyUwzp2DBW1zGMPNJxhRfGAoF89dLZ5_Q6IOUn1qDUDgvJDeD7O8uHNMEIyJo-DgHFsLdGBMydA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Kroger-Tenant",
+								"value": "kroger"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "asdf"
+							},
+							{
+								"key": "True-Client-Ip",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "clientId",
+								"value": "{{clientId}}"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$timestamp}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"IBC\",\n    \"description\": \"It has best food\",\n    \"address\": \"Near HSR LAYOUT\",\n    \"pincode\": \"560038\",\n    \"latitude\": 12.9474,\n    \"longitude\": 77.5990,\n    \"is_available\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{eix-merchant-platform-consumer-url}}/restaurants",
+							"host": [
+								"{{eix-merchant-platform-consumer-url}}"
+							],
+							"path": [
+								"restaurants"
+							],
+							"query": [
+								{
+									"key": "filter.access",
+									"value": "ADMIN",
+									"disabled": true
+								},
+								{
+									"key": "filter.authorize",
+									"value": "377865f7-8fa0-4758-bf08-90de95978efd",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Restaurants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'code' field in the 'errors' array is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.errors).to.be.an('array');",
+									"    ",
+									"    responseData.errors.forEach(function(error) {",
+									"        pm.expect(error.code).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'reason' field in the 'errors' array is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.errors).to.be.an('array');",
+									"  responseData.errors.forEach(function(error) {",
+									"    pm.expect(error.reason).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Kroger-Tenant",
+								"value": "kroger"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "asdf"
+							},
+							{
+								"key": "True-Client-Ip",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "clientId",
+								"value": "{{clientId}}"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$timestamp}}"
+							}
+						],
+						"url": {
+							"raw": "{{eix-merchant-platform-consumer-url}}/restaurants",
+							"host": [
+								"{{eix-merchant-platform-consumer-url}}"
+							],
+							"path": [
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Restaurant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'code' field in the 'errors' array is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.errors).to.be.an('array');",
+									"    ",
+									"    responseData.errors.forEach(function(error) {",
+									"        pm.expect(error.code).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'reason' field in the 'errors' array is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.errors).to.be.an('array');",
+									"  responseData.errors.forEach(function(error) {",
+									"    pm.expect(error.reason).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjlHbW55RlBraGMzaE91UjIybXZTdmduTG83WSJ9.eyJhdWQiOiI3OGNiOWZkZC1mYTMzLTQ2MDYtOTQ0YS00MTJkMjJhNTQ0N2IiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vODMzMWUxNGEtOTEzNC00Mjg4LWJmNWEtNWUyYzg0MTJmMDc0L3YyLjAiLCJpYXQiOjE2OTc3OTE2MDYsIm5iZiI6MTY5Nzc5MTYwNiwiZXhwIjoxNjk3Nzk1NTA2LCJuYW1lIjoiUHVwcGFsYSwgU3VkaGVlciBLdW1hciAoTm9uRW1wKSIsIm5vbmNlIjoiOGQ2M2E5MzMtMWEyMS00MjliLThkZDktMDYxYmZhNzY4OWYzIiwib2lkIjoiOTI5OTAwNGMtOGFiYy00NTlkLTkzYzctZWYxNjU1NGE5MTVkIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic3VkaGVlcmt1bWFyLnB1cHBhbGFAa3JvZ2VyLmNvbSIsInJoIjoiMC5BUmNBU3VFeGd6U1JpRUtfV2w0c2hCTHdkTjJmeTNnei1nWkdsRXBCTFNLbFJIc1hBS1EuIiwicm9sZXMiOlsiZ0FEODM0MU1YUG9ydGFsQWRtaW5OIiwiZ0FEODM0MU1YVXNlclJlYWRlck4iLCJnQUQ4MzQxTVhVc2VyQ29udHJpYnV0b3JOIl0sInN1YiI6IjZNb1RMbW9KVTVzSW84SEkteUlfaC1EeVBtVVlXSTR6V1JCSVhzcVZLd3MiLCJ0aWQiOiI4MzMxZTE0YS05MTM0LTQyODgtYmY1YS01ZTJjODQxMmYwNzQiLCJ1dGkiOiI2bS1LXzhwR3IwbU90NzJKNlkwSEFBIiwidmVyIjoiMi4wIn0.pL2AlJ8mXq8JwiyhnDabtP_ZNctLCDC7k_NdMTlwMutbBMEB4O4YpuOX79k9YC9ce0legk0E5nk9myrpldHMdxXeT9CI_U9I6DTcaap5MFXDzhF7eSueSok6QkgMMk_7mGLvFoP2jQ2S4xnT2AP15Nk0kh9k5Qwn018Ix7Bv1fpbxFcFqVomtdi_StrhIPMxAbUdALrEVd4IrSprjFkSkkQOn-Ro4ZXyvdO8myInOMfB9E68G6yEVvsE2E0USiSXUxUd_8v7CotTyUwzp2DBW1zGMPNJxhRfGAoF89dLZ5_Q6IOUn1qDUDgvJDeD7O8uHNMEIyJo-DgHFsLdGBMydA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Kroger-Tenant",
+								"value": "kroger"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "asdf"
+							},
+							{
+								"key": "True-Client-Ip",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "clientId",
+								"value": "{{clientId}}"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$timestamp}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hoot Musical\",\n    \"description\": \"It is best brewery with amazing ambinece and good DJ music --Updated\",\n    \"address\": \"Near Sarjapur Beside phonepe office Road Bangalore\",\n    \"pincode\": \"560038\",\n    \"latitude\": 12.9474,\n    \"longitude\": 77.5990,\n    \"is_available\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{eix-merchant-platform-consumer-url}}/restaurants/4",
+							"host": [
+								"{{eix-merchant-platform-consumer-url}}"
+							],
+							"path": [
+								"restaurants",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Restaurant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'code' field in the 'errors' array is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.errors).to.be.an('array');",
+									"    ",
+									"    responseData.errors.forEach(function(error) {",
+									"        pm.expect(error.code).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'reason' field in the 'errors' array is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.errors).to.be.an('array');",
+									"  responseData.errors.forEach(function(error) {",
+									"    pm.expect(error.reason).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Kroger-Tenant",
+								"value": "kroger"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "asdf"
+							},
+							{
+								"key": "True-Client-Ip",
+								"value": "127.0.0.1"
+							},
+							{
+								"key": "clientId",
+								"value": "{{clientId}}"
+							},
+							{
+								"key": "X-Idempotency-Key",
+								"value": "{{$timestamp}}"
+							}
+						],
+						"url": {
+							"raw": "{{eix-merchant-platform-consumer-url}}/restaurants/1",
+							"host": [
+								"{{eix-merchant-platform-consumer-url}}"
+							],
+							"path": [
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restaurant-order-status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order_id\": 1,\r\n    \"restaurant_id\": 2,\r\n    \"status\": \"accepted\",\r\n    \"item_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/restaurant/2/order/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"restaurant",
+								"2",
+								"order",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
